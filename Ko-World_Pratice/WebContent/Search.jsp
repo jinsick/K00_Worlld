@@ -68,11 +68,11 @@
 							</div>
 							<div class="row marginbot-20">
 								<div class="col-md-6 xs-marginbot-20">
-									<input type="text" class="form-control input-lg" id="name"
+									<input type="text" class="form-control input-lg" id="name1"
 										placeholder="Name2" required="required" />
 								</div>
 								<div class="col-md-6 xs-marginbot-20">
-									<input type="text" class="form-control input-lg" id="birth"
+									<input type="text" class="form-control input-lg" id="birth1"
 										placeholder="date of birth (Ex. 920616)" required="required" />
 								</div>
 							</div>

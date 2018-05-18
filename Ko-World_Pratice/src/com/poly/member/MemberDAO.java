@@ -15,10 +15,9 @@ public class MemberDAO {
 	private Connection conn;
 	private String sql;
 	private PreparedStatement pstmt;
-	private int cnt;
 	private ResultSet rs;
 	private boolean result;
-
+	
 	public MemberDAO() {// �깮�꽦�옄
 		
 			try {
@@ -38,20 +37,19 @@ public class MemberDAO {
 	public void memberJoin(MemberDTO memberDTO) {
 		try {
 			
-			sql = "INSERT INTO member(id, pw, name, birth1, email1, phone1, name2, birth2, email2, phone2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);)";
+			sql = "INSERT INTO member(id, pw, name1, birth1, email1, phone1, name2, birth2, email2, phone2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getId());
 			pstmt.setString(2, memberDTO.getPw());
 			pstmt.setString(3, memberDTO.getName1());
 			pstmt.setString(4, memberDTO.getBirth1());
 			pstmt.setString(5, memberDTO.getEmail1());
-			pstmt.setString(6, memberDTO.getPhone1());
+			pstmt.setString(6, memberDTO.getTphone1());
 			pstmt.setString(7, memberDTO.getName2());
 			pstmt.setString(8, memberDTO.getBirth2());
 			pstmt.setString(9, memberDTO.getEmail2());
-			pstmt.setString(10, memberDTO.getPhone2());
-			cnt = pstmt.executeUpdate();
-			System.out.println("A");
+			pstmt.setString(10, memberDTO.getTphone2());
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -59,19 +57,56 @@ public class MemberDAO {
 	
 	
 	
-	public String memberSearchId(MemberDTO memberDTO) {
+	public void memberSearchId(MemberDTO memberDTO) {
 		try {
-			sql = "insert into student(id,pw,name1,birth1,email1,phone1,name2,birth2,email2,phone2) values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "select * from member as sequence where name1=? and brith1=? ";
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(3, memberDTO.getName1());
-			pstmt.setString(4, memberDTO.getBirth1());
-			
-			
+				pstmt.setString(3, memberDTO.getName1());
+				pstmt.setString(4, memberDTO.getBirth1());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					memberDTO.setId(rs.getString("id"));
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return memberDTO.getId();
+	}
+	
+	public void memberSearchPW(MemberDTO memberDTO) {
+		sql = "select * from member as sequence where id=? name1=? and brith1=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getId());
+			pstmt.setString(2, memberDTO.getName1());
+			pstmt.setString(3, memberDTO.getBirth1());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberDTO.setPw(rs.getString("pw"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean memberLogin(MemberDTO memberDTO) {
+		sql = "select id,pw from member where id=? and pw=?";
+		try {
+			result = false;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getId());;
+			pstmt.setString(2, memberDTO.getPw());
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+			result = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	

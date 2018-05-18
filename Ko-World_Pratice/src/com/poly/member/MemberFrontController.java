@@ -3,11 +3,13 @@ package com.poly.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("*.mem")
 public class MemberFrontController extends HttpServlet {
@@ -39,48 +41,67 @@ public class MemberFrontController extends HttpServlet {
 		   
 		   
 		if (command.equals("/join.mem")) { // 회원가입 시작
-			System.out.println("bbbbbbbbbbbbbbbbbbbb");
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String pwch = request.getParameter("pwch");
-			String name1 = request.getParameter("name1");
-			String birth1 = request.getParameter("birth1");
-			String email1 = request.getParameter("email1");
-			String tel1 = request.getParameter("tel1");
-			String tel2 = request.getParameter("tel2");
-			String tel3 = request.getParameter("tel3");
-			String phone1 = tel1.concat("-" + tel2 + "-" + tel3);
-			String name2 = request.getParameter("name2");
-			String birth2 = request.getParameter("birth2");
-			String email2 = request.getParameter("email2");
-			String tel4 = request.getParameter("tel4");
-			String tel5 = request.getParameter("tel5");
-			String tel6 = request.getParameter("tel6");
-			String phone2 = tel4.concat("-" + tel5 + "-" + tel6);
-			memberDTO.setId(id);
-			memberDTO.setPw(pw);
-			memberDTO.setPwch(pwch);
-			memberDTO.setName1(name1);
-			memberDTO.setBirth1(birth1);
-			memberDTO.setEmail1(email1);
-			memberDTO.setPhone1(phone1);
-			memberDTO.setName2(name2);
-			memberDTO.setBirth2(birth2);
-			memberDTO.setEmail2(email2);
-			memberDTO.setPhone2(phone2);
+	
+			memberDTO.setId(request.getParameter("id"));
+			memberDTO.setPw(request.getParameter("pw"));
+			memberDTO.setPwch(request.getParameter("pwch"));
+			memberDTO.setName1(request.getParameter("name1"));
+			
+			
+			
+			
 			memberDAO.memberJoin(memberDTO);
-			System.out.println("aaaaaaaaa");
+			response.sendRedirect("index.html");
 		
 		} // 회원가입 끝
 
-		if (command.equals("/searchId.mem")) { // 아이디찾기 시작
-			String name1 = request.getParameter("name1");
-			String birth1 = request.getParameter("birth1");
+		else if (command.equals("/searchId.mem")) { // 아이디찾기 시작
 
-			memberDTO.setName1(name1);
-			memberDTO.setBirth1(birth1);
+			memberDTO.setName1(request.getParameter("name1"));
+			memberDTO.setBirth1(request.getParameter("brith1"));
+			memberDAO.memberSearchId(memberDTO);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("idSearch.jsp");
+			request.setAttribute("id", memberDTO.getId());
+			dispatcher.forward(request, response);
 
 		} // 아이디찾기 끝
+		
+		else if(command.equals("/searchPW.mem")) {//비밀번호 찾기 시작
+			memberDTO.setId(request.getParameter("id"));
+			memberDTO.setName1(request.getParameter("name1"));
+			memberDTO.setBirth1(request.getParameter("birth1"));
+			memberDAO.memberSearchPW(memberDTO);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pwSearch.jsp");
+			request.setAttribute("pw", memberDTO.getPw());
+			dispatcher.forward(request, response);
+		}// 비밀번호 찾기 끝
+		
+		else if(command.equals("/login.mem")) {
+			HttpSession session = request.getSession(true);
+			boolean result = false;
+			String id = request.getParameter("id");
+			memberDTO.setId(id);
+			memberDTO.setPw(request.getParameter("pw"));
+			result = memberDAO.memberLogin(memberDTO);
+			
+			if (result==true) {
+				System.out.println("bbbbbbbb"+id);
+				session.setAttribute("id", id);
+				response.sendRedirect("index.html");
+			} else {
+				out.println("<html>");
+				out.print("<script language='javascript'>");
+				out.print("alert('회원정보가 일치하지 않습니다. 다시 시도해 주십시오')");
+				out.print("location.href='loginPage.html'");
+				out.print("</script>");
+				out.println("</html>");
+				
+			}
+			
+		}
+		
+		
 	}
 
 }
