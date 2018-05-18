@@ -23,7 +23,7 @@ public class MemberDAO {
 		
 			try {
 				Context ctx = new InitialContext();
-				dataFactory = (DataSource) ctx.lookup(Constval.DB_NAME);
+				dataFactory = (DataSource) ctx.lookup(ConstVal.DB_name);
 				conn = dataFactory.getConnection();
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
@@ -72,7 +72,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return memberDTO.getId();
-	}// 
+	}
 
 	
 
