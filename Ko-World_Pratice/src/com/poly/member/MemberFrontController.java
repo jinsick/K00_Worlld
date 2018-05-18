@@ -33,13 +33,11 @@ public class MemberFrontController extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");// 받아올때도 UTF-8로
 		PrintWriter out = response.getWriter();
 
-		   String requestURI = request.getRequestURI();
-		   String contextPath = request.getContextPath();
-		   String command = requestURI.substring(contextPath.length());
-		   
-		   
+		String requestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = requestURI.substring(contextPath.length());
+
 		if (command.equals("/join.mem")) { // 회원가입 시작
-			System.out.println("bbbbbbbbbbbbbbbbbbbb");
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			String pwch = request.getParameter("pwch");
@@ -68,19 +66,37 @@ public class MemberFrontController extends HttpServlet {
 			memberDTO.setBirth2(birth2);
 			memberDTO.setEmail2(email2);
 			memberDTO.setPhone2(phone2);
+			
 			memberDAO.memberJoin(memberDTO);
-			System.out.println("aaaaaaaaa");
-		
+
 		} // 회원가입 끝
 
 		if (command.equals("/searchId.mem")) { // 아이디찾기 시작
 			String name1 = request.getParameter("name1");
 			String birth1 = request.getParameter("birth1");
-
 			memberDTO.setName1(name1);
 			memberDTO.setBirth1(birth1);
-
+			
+			memberDAO.memberSearchId(memberDTO);
+			String id = memberDTO.getId();        /////////////////////////////////////////// 아이디값을 찍어줄 곳 찾기
 		} // 아이디찾기 끝
+
+		if (command.equals("/searchPw.mem")) { // 비밀번호찾기 시작
+			String id = request.getParameter("id");
+			String name1 = request.getParameter("name1");
+			String birth1 = request.getParameter("birth1");
+			memberDTO.setId(id);
+			memberDTO.setName1(name1);
+			memberDTO.setBirth1(birth1);
+			
+			memberDAO.memberSearchPw(memberDTO);
+			String pw = memberDTO.getPw();            ////////////////////////////////////////// 비밀번호 찍어줄 곳 찾기
+		} // 비밀번호찾기 끝
+		
+		
+		
+		
+
 	}
 
 }

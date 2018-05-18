@@ -15,29 +15,28 @@ public class MemberDAO {
 	private Connection conn;
 	private String sql;
 	private PreparedStatement pstmt;
-	private int cnt;
 	private ResultSet rs;
-	private boolean result;
+	//private boolean result;
 
-	public MemberDAO() {// �깮�꽦�옄
-		
-			try {
-				Context ctx = new InitialContext();
-				dataFactory = (DataSource) ctx.lookup(ConstVal.DB_name);
-				conn = dataFactory.getConnection();
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	}// �깮�꽦�옄
+	public MemberDAO() {// DB 연결 시작
 
-	public void memberJoin(MemberDTO memberDTO) {
 		try {
-			
+			Context ctx = new InitialContext();
+			dataFactory = (DataSource) ctx.lookup(ConstVal.DB_name);
+			conn = dataFactory.getConnection();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}// DB 연결 끝
+
+	public void memberJoin(MemberDTO memberDTO) { // 회원가입 시작
+		try {
+
 			sql = "INSERT INTO member(id, pw, name, birth1, email1, phone1, name2, birth2, email2, phone2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getId());
@@ -50,36 +49,41 @@ public class MemberDAO {
 			pstmt.setString(8, memberDTO.getBirth2());
 			pstmt.setString(9, memberDTO.getEmail2());
 			pstmt.setString(10, memberDTO.getPhone2());
-			cnt = pstmt.executeUpdate();
-			System.out.println("A");
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
-	public String memberSearchId(MemberDTO memberDTO) {
+	} // 회원가입 끝
+
+	public void memberSearchId(MemberDTO memberDTO) { // id찾기 시작
 		try {
-			sql = "insert into student(id,pw,name1,birth1,email1,phone1,name2,birth2,email2,phone2) values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "select id from member where name1=? birth1=?";
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(3, memberDTO.getName1());
-			pstmt.setString(4, memberDTO.getBirth1());
-			
-			
+			pstmt.setString(1, memberDTO.getName1());
+			pstmt.setString(2, memberDTO.getBirth1());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberDTO.setId(rs.getString("id"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return memberDTO.getId();
-	}
+	}// id찾기 끝
 
-	
+	public void memberSearchPw(MemberDTO memberDTO) { // pw찾기 시작
+		try {
+			sql = "select pw from member where id=? name1=? birth1=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getId());
+			pstmt.setString(2, memberDTO.getName1());
+			pstmt.setString(3, memberDTO.getBirth1());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberDTO.setPw(rs.getString("pw"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} // pw찾기 끝
 
-	
-
-	
-	
-	
-	
 }
