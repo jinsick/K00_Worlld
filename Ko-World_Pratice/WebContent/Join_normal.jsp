@@ -100,7 +100,7 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="animatedParent">
-						<h1>학생부 회원가입</h1>
+						<h1>일반부 회원가입</h1>
 						<div class="divider-header"></div>
 					</div>
 				</div>
@@ -113,7 +113,7 @@
 		<div class="container">
 			<div class="row marginbot-80">
 				<div class="col-md-8 col-md-offset-2">
-					<form id="contact-form" action="join.mem" method="post">
+					<form id="contact-form" action="joinNormal.mem" method="post">
 
 
 						<!-- 공통 ID/PW 입력 -->
@@ -171,7 +171,7 @@
 						<div class="row marginbot-20">
 							<div class="col-md-6 xs-marginbot-20">
 								<input type="text" class="form-control input-lg" name="job1"
-									placeholder="직업 (Ex. 학생)" required="required" />
+									placeholder="직업 (Ex. JAVA개발자)" required="required" />
 							</div>
 							<div class="col-md-6 xs-marginbot-20">
 								<input type="email" class="form-control input-lg" name="email1"
@@ -181,20 +181,29 @@
 
 
 
-						<!-- 학교 학년 정보 입력란 ////////////////////////////파라미터값 확인 할것//////////////////////////////////-->
+						<!-- 일반부 출신학교 적는 란   학교명(school1 + school11)  학년 및 현상태 (grade1 + grade11)-->
 						<div class="row marginbot-20">
 							<div class="col-md-6 xs-marginbot-20">
 								<a>출신학교</a>&nbsp;&nbsp;<a>:</a>&nbsp;&nbsp; <input type="text"
-									name="school1" placeholder="학교명" required="required" size="10" />
+									name="school1" placeholder="학교명" required="required" size="5" />
 								<select name="school11">
-									<option label="중학교" value="middle"></option>
-									<option label="고등학교" value="high" selected="selected"></option>
+									<option label="대학교" value="university" selected="selected"></option>
 								</select> &nbsp; <select name="grade1">
-									<option label="1학년" value="1grade" selected="selected"></option>
-									<option label="2학년" value="2grade"></option>
-									<option label="3학년" value="3grade"></option>
-								</select>
+									<option label="" selected="selected">학년</option>
+									<option label="1학년" value="1grade">1</option>
+									<option label="2학년" value="2grade">2</option>
+									<option label="3학년" value="3grade">3</option>
+									<option label="4학년" value="4grade">4</option>
+								</select> <select name="grade11">
+									<option label="재학" value="InSchool" selected="selected"></option>
+									<option label="중퇴" value="DropSchool"></option>
+									<option label="휴학" value="LeaveSchool"></option>
+									<option label="졸업" value="FinishSchool"></option>
+								</select> <input type="text" name="line1" placeholder="전공계열" /> <input
+									type="text" name="department1" placeholder="학과" />
 							</div>
+
+
 							<div class="col-md-6 xs-marginbot-20">
 								<a>성별 입력 :</a>&nbsp;&nbsp; <a>남성 </a>&nbsp; <input type="radio"
 									name="sex1" value="man"> &nbsp;&nbsp; <a>여성 </a>&nbsp;
@@ -260,7 +269,7 @@
 								<div class="row marginbot-20">
 									<div class="col-md-6 xs-marginbot-20">
 										<input type="text" class="form-control input-lg" name="job2"
-											placeholder="직업(Ex. 학생)" />
+											placeholder="직업 (Ex. JAVA개발자)" />
 									</div>
 									<div class="col-md-6 xs-marginbot-20">
 										<input type="email" class="form-control input-lg"
@@ -270,20 +279,31 @@
 
 
 
-
+								<!-- 계열 / 과 파라미터 설정할 것 -->
 								<div class="row marginbot-20">
 									<div class="col-md-6 xs-marginbot-20">
 										<a>출신학교</a>&nbsp;&nbsp;<a>:</a>&nbsp;&nbsp; <input type="text"
-									name="school2" placeholder="학교명" size="10" />
-								<select name="school22">
-									<option label="중학교" value="middle"></option>
-									<option label="고등학교" value="high" selected="selected"></option>
-								</select> &nbsp; <select name="grade1">
-									<option label="1학년" value="1grade" selected="selected"></option>
-									<option label="2학년" value="2grade"></option>
-									<option label="3학년" value="3grade"></option>
-								</select>
+											name="school2" placeholder="학교명" size="5" /> <select
+											name="school22">
+											<option label="대학교" value="university" selected="selected"></option>
+										</select> &nbsp; <select name="grade2">
+											<option label="" selected="selected">학년</option>
+											<option label="1학년" value="1grade">1</option>
+											<option label="2학년" value="2grade">2</option>
+											<option label="3학년" value="3grade">3</option>
+											<option label="4학년" value="4grade">4</option>
+										</select> <select name="grade22">
+											<option label="재학" value="InSchool" selected="selected"></option>
+											<option label="중퇴" value="DropSchool"></option>
+											<option label="휴학" value="LeaveSchool"></option>
+											<option label="졸업" value="FinishSchool"></option>
+										</select> <input type="text" name="line2" placeholder="전공계열" /> <input
+									type="text" name="department2" placeholder="학과" />
+
 									</div>
+
+
+
 									<div class="col-md-6 xs-marginbot-20">
 										<a>성별 입력 :</a>&nbsp;&nbsp; <a>남성 </a>&nbsp; <input
 											type="radio" name="sex2" value="man"> &nbsp;&nbsp; <a>여성
@@ -328,19 +348,10 @@
 							<button type="submit" class="btn btn-skin btn-lg btn-block"
 								id="btnContactUs">Joining</button>
 						</div>
-
-						<!-- 	</div> -->
 					</form>
 				</div>
-
-
-
-
-
 			</div>
 		</div>
 	</section>
-
-
 </body>
 </html>

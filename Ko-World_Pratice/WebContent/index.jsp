@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%
+	String id = (String)session.getAttribute("id");
+	%>
 <!DOCTYPE html>
 <html>
 
@@ -21,6 +26,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="color/default.css" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -29,6 +35,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-right navicon">
+				
 					<a id="nav-toggle" class="nav_slide_button" href="#"><span></span></a>
 				</div>
 			</div>
@@ -57,7 +64,7 @@
 				<div class="row">
 					<div class="col-md-2">
 						<div class="site-logo">
-							<a href="index.html" class="brand"><img
+							<a href="index.jsp" class="brand"><img
 								src="img/works/hankuk.png"></a>
 						</div>
 					</div>
@@ -75,13 +82,20 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="menu">
 							<ul class="nav navbar-nav navbar-right">
-								<li class="active"><a href="index.html#intro">Home</a></li>
-								<li><a href="index.html#about">caution</a></li>
-								<li><a href="index.html#service">problem</a></li>
-								<li><a href="index.html#works">promotion</a></li>
+								<li class="active"><a href="index.jsp#intro">Home</a></li>
+								<li><a href="index.jsp#about">caution</a></li>
+								<li><a href="index.jsp#service">problem</a></li>
+								<li><a href="index.jsp#works">promotion</a></li>
 
-								<li><a href="Join.jsp#container">quality assurance</a></li>
+								<li><a href="boardList.board">quality assurance</a></li>
+								
+						<% if(id != null){ %>
+						
+									<li><a href="logout.mem">logout</a></li>
+									<h3 style="font-size: 10px;text-align:right;"><%=id %>님이 로그인 하셨습니다.</h3>
+									<%}else { %>
 								<li><a href="loginPage.html#login">Login</a></li>
+						<%} %>
 							</ul>
 						</div>
 						<!-- /.Navbar-collapse -->
@@ -90,6 +104,7 @@
 				</div>
 			</div>
 			<!-- /.container -->
+			
 		</nav>
 	</div>
 	<!-- /Navigation -->
@@ -236,14 +251,14 @@
 							</a>
 						</div> -->
 						<div style="left: 50%" class="col-md-3 animated fadeInUp slow">
-							<a href="img/works/ko-1.jpg" title="This is an image title"
+							<a href="img/works/ko-1.jpg" title="제 1회 Ko-World 해킹 방어대회 설명 앞"
 								data-lightbox-gallery="gallery1"
 								data-lightbox-hidpi="img/works/1@2x.jpg"> <img
 								src="img/works/ko-1.jpg" class="img-responsive" alt="img">
 							</a>
 						</div>
 						<div class="col-md-3 animated fadeInUp slower">
-							<a href="img/works/ko-2.jpg" title="This is an image title"
+							<a href="img/works/ko-2.jpg" title="제 1회 Ko-World 해킹 방어대회 설명 뒤"
 								data-lightbox-gallery="gallery1"
 								data-lightbox-hidpi="img/works/1@2x.jpg"> <img
 								src="img/works/ko-2.jpg" class="img-responsive" alt="img">
@@ -281,7 +296,6 @@
 		</div>
 
 		<div class="container">
-
 			<div class="row marginbot-80">
 				<div class="col-md-8 col-md-offset-2">
 					<form id="contact-form">
@@ -312,11 +326,17 @@
 					</form>
 				</div>
 			</div>
-
-
 		</div>
 	</section>
-	<!-- /Section: contact -->
+
+
+
+
+
+
+
+
+
 
 
 	<footer>
@@ -330,8 +350,7 @@
 				</div>
 				<div class="col-md-6 text-right">
 					<p>
-						&copy;Copyright 2014 - Bocor. <a href="http://bootstraptaste.com/">Bootstrap
-							Themes</a> by BootstrapTaste
+						&copy;제1회 KO-WORLD 해킹방어 대회 개최 2018 - Kopo. <a href="http://www.kopo.ac.kr/kangseo/index.do">한국폴리텍대학</a><br> by Department of Information Security
 					</p>
 					<!-- 
                         All links in the footer should remain intact. 

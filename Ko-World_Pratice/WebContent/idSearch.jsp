@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="site-logo">
-						<a href="index.html" class="brand"><img
+						<a href="index.jsp" class="brand"><img
 							src="img/works/hankuk.png"></a>
 					</div>
 				</div>
@@ -77,12 +77,12 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="menu">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="active"><a href="index.html#intro">Home</a></li>
-							<li><a href="index.html#about">About Us</a></li>
-							<li><a href="index.html#service">Services</a></li>
-							<li><a href="index.html#works">Works</a></li>
+							<li class="active"><a href="index.jsp#intro">Home</a></li>
+							<li><a href="index.jsp#about">caution</a></li>
+							<li><a href="index.jsp#service">problem</a></li>
+							<li><a href="index.jsp#works">promotion</a></li>
 
-							<li><a href="Join.jsp#container">Contact</a></li>
+							<li><a href="boardList.board">quality assurance</a></li>
 							<li><a href="loginPage.html#login">Login</a></li>
 						</ul>
 					</div>
@@ -137,7 +137,7 @@
 					<div class="col-md-6">
 						<input type="submit" class="btn btn-skin btn-lg btn-block"
 							id="btnContactUs" value="홈페이지"
-							onclick="location.href='index.html'">
+							onclick="location.href='index.jsp'">
 					</div>
 				</div>
 
